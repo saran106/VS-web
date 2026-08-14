@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaagai Boutique Couture — Bridal & Custom Blouse Stitching, Chennai</title>
+<link rel="icon" href="Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --aubergine:#3B1638;
+    --aubergine-2:#4E1F49;
+    --magenta:#D91C82;
+    --purple:#7A2C8E;
+    --gold:#C9A24B;
+    --teal:#2E8C87;
+    --cream:#FBF4EE;
+    --cream-2:#F3E9DE;
+    --ink:#2A1728;
+    --nav-h:88px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
+  body{font-family:'Jost',sans-serif;color:var(--ink);background:var(--cream);overflow-x:hidden;width:100%;font-weight:300;line-height:1.6;}
+  body.intro-lock{overflow:hidden;height:100vh;}
+  h1,h2,h3,h4{font-family:'Marcellus',serif;font-weight:400;letter-spacing:.01em;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1220px;margin:0 auto;padding:0 28px;}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--magenta);font-weight:600;display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--magenta);display:inline-block;}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{animation-duration:.001s!important;transition-duration:.001s!important;}#introOverlay{display:none!important;}}
+
+  /* ── INTRO ── */
+  #introOverlay{
+    position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#F8F1F8 0%,#FBF4EE 45%,#F3E9DE 100%);overflow:hidden;
+  }
+  .intro-bg{position:absolute;inset:0;background:url('luxury-bg.webp') center/cover no-repeat;opacity:.9;}
+  .intro-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,0) 0%,rgba(251,244,238,.6) 80%);}
+
+  /* intro: logo starts large in center, then FLIES to navbar slot */
+  #introAnimLogo{
+    position:fixed; /* fixed so we can calc exact coords */
+    z-index:100000;
+    pointer-events:none;
+    will-change:transform,opacity;
+    /* centred, large */
+    top:50%; left:50%;
+    transform:translate(-50%,-50%) scale(1);
+    opacity:0;
+  }
+  #introAnimLogo img{
+    width:220px; height:220px; object-fit:contain;
+    filter:drop-shadow(0 24px 48px rgba(59,22,56,.35));
+    border-radius:16px;
+  }
+  .intro-tag{position:absolute;bottom:8%;left:0;right:0;text-align:center;z-index:2;color:var(--aubergine);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;opacity:.6;}
+
+  /* ── NAV ── */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 36px;
+    height:var(--nav-h);
+    transition:.35s ease;background:transparent;
+    opacity:0;pointer-events:none;
+  }
+  header.scrolled{background:rgba(59,22,56,.95);backdrop-filter:blur(10px);box-shadow:0 6px 28px rgba(0,0,0,.22);}
+  /* ── LOGO SIZE: big on all screens ── */
+  .brand img{height:72px;width:auto;border-radius:8px;display:block;}
+  nav.links{display:flex;gap:34px;align-items:center;}
+  nav.links a{font-size:.86rem;letter-spacing:.03em;color:var(--cream);position:relative;padding:4px 0;}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold);transition:.3s;}
+  nav.links a:hover::after{width:100%;}
+  .talk-btn{background:linear-gradient(120deg,var(--magenta),var(--purple));color:#fff!important;padding:10px 24px;border-radius:30px;font-size:.82rem;letter-spacing:.05em;box-shadow:0 8px 20px rgba(217,28,130,.35);transition:.3s;}
+  .talk-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(217,28,130,.45);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;}
+  .burger span{width:26px;height:2px;background:var(--cream);display:block;}
+
+  section[id],div[id]{scroll-margin-top:var(--nav-h);}
+
+  /* ── HERO ── */
+  .hero{
+    min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;
+    background:radial-gradient(ellipse at 75% 20%,rgba(217,28,130,.30),transparent 55%),
+               radial-gradient(ellipse at 15% 85%,rgba(46,140,135,.25),transparent 50%),
+               linear-gradient(160deg,var(--aubergine) 0%,var(--aubergine-2) 55%,#2A1032 100%);
+  }
+  .hero::before{content:"";position:absolute;inset:0;opacity:.10;pointer-events:none;background-image:radial-gradient(circle,var(--gold) 1.4px,transparent 1.4px);background-size:26px 26px;}
+  .hero-inner{position:relative;z-index:2;padding:150px 28px 90px;max-width:1220px;margin:0 auto;display:grid;grid-template-columns:1fr .95fr;gap:40px;align-items:center;perspective:1400px;}
+  .hero h1{color:var(--cream);font-size:clamp(2.1rem,4.2vw,3.4rem);line-height:1.15;max-width:620px;}
+  .hero h1 span{color:var(--gold);}
+  .hero p{color:#E9DCE6;max-width:470px;margin-top:22px;font-size:1.02rem;}
+  .hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .btn-solid{background:linear-gradient(120deg,var(--magenta),var(--purple));color:#fff;padding:15px 30px;border-radius:32px;font-size:.9rem;letter-spacing:.04em;box-shadow:0 10px 26px rgba(217,28,130,.35);transition:.3s;display:inline-block;}
+  .btn-solid:hover{transform:translateY(-3px);}
+  .btn-ghost{border:1px solid rgba(255,255,255,.5);color:var(--cream);padding:15px 30px;border-radius:32px;font-size:.9rem;letter-spacing:.04em;transition:.3s;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:var(--gold);}
+
+  .stage3d{perspective:1400px;height:480px;position:relative;}
+  .stage3d-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .12s ease-out;will-change:transform;}
+  .layer{position:absolute;transform-style:preserve-3d;}
+  .layer-glow{inset:-40px;border-radius:50%;transform:translateZ(-160px) scale(1.15);background:radial-gradient(circle,rgba(217,28,130,.45),transparent 65%);filter:blur(10px);}
+  .layer-photo{inset:40px 60px 40px 20px;transform:translateZ(20px);border-radius:22px;overflow:hidden;box-shadow:0 40px 70px rgba(0,0,0,.45),0 0 0 6px rgba(255,255,255,.08),0 0 0 8px rgba(201,162,75,.5);}
+  .layer-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+  .layer-badge{right:-6px;bottom:18px;transform:translateZ(90px);width:158px;text-align:center;background:linear-gradient(135deg,var(--magenta),var(--purple));color:#fff;border-radius:16px;padding:18px 14px;box-shadow:0 26px 46px rgba(217,28,130,.4);border:1px solid rgba(255,255,255,.25);}
+  .layer-badge .num{font-family:'Cormorant Garamond';font-style:italic;font-size:1.8rem;color:var(--gold);}
+  .layer-badge .lbl{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+  .layer-chip{left:-18px;top:6px;transform:translateZ(70px);background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 20px 40px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--aubergine);font-weight:500;}
+  .layer-chip .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);}
+  .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:var(--cream);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.75;z-index:3;}
+  .scroll-cue .line{width:1px;height:34px;background:linear-gradient(var(--gold),transparent);animation:down 1.6s ease-in-out infinite;}
+  @keyframes down{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+  /* ── MARQUEE ── */
+  .marquee{background:linear-gradient(90deg,var(--magenta),var(--purple));color:#fff;padding:16px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:3;}
+  .marquee-track{display:inline-block;animation:scroll-left 26s linear infinite;}
+  .marquee-track span{font-family:'Marcellus';font-size:1rem;letter-spacing:.04em;margin:0 26px;}
+  .marquee-track span::after{content:"✦";margin-left:26px;color:var(--gold);}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ── SEC BASE ── */
+  .sec{padding:100px 0;}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);margin-top:14px;color:var(--aubergine);}
+  .sec-head p{color:#6b5468;margin-top:14px;font-size:.98rem;}
+
+  /* ── SERVICES FLIP ── */
+  .services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;}
+  .flip-card{height:250px;perspective:1200px;opacity:0;}
+  .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1);}
+  .flip-card:hover .flip-inner{transform:rotateY(180deg);}
+  .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .flip-front{background:#fff;box-shadow:0 10px 30px rgba(59,22,56,.1);}
+  .flip-back{background:linear-gradient(150deg,var(--magenta),var(--purple));color:#fff;transform:rotateY(180deg);box-shadow:0 20px 40px rgba(217,28,130,.35);}
+  .flip-front .icon{width:58px;height:58px;margin-bottom:16px;border-radius:50%;font-size:1.5rem;background:linear-gradient(135deg,rgba(217,28,130,.12),rgba(122,44,142,.12));display:flex;align-items:center;justify-content:center;}
+  .flip-front h3{font-size:1.02rem;color:var(--aubergine);}
+  .flip-back h4{font-family:'Marcellus';font-size:1rem;margin-bottom:10px;}
+  .flip-back p{font-size:.82rem;opacity:.92;}
+
+  /* ── PREMIUM 3D PROCESS SECTION ── */
+  .process-sec{
+    padding:110px 0;
+    background:linear-gradient(160deg,var(--aubergine) 0%,#2A1032 100%);
+    position:relative;overflow:hidden;
+  }
+  .process-sec::before{
+    content:"";position:absolute;inset:0;opacity:.06;
+    background-image:radial-gradient(circle,var(--gold) 1px,transparent 1px);
+    background-size:30px 30px;
+  }
+  .process-sec .sec-head h2,.process-sec .sec-head p{color:var(--cream);}
+  .process-sec .eyebrow{color:var(--gold);}
+  .process-sec .eyebrow::before{background:var(--gold);}
+  .process-track{
+    display:flex;gap:0;align-items:stretch;
+    max-width:1100px;margin:0 auto;padding:0 28px;
+    position:relative;
+  }
+  .process-track::before{
+    content:"";position:absolute;top:60px;left:calc(28px + 60px);right:calc(28px + 60px);
+    height:2px;background:linear-gradient(90deg,var(--gold),var(--magenta),var(--gold));
+    opacity:.4;z-index:0;
+  }
+  .process-step{
+    flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;
+    position:relative;z-index:1;opacity:0;
+    padding:0 8px;
+  }
+  .process-num{
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(135deg,var(--magenta),var(--purple));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;color:var(--gold);
+    box-shadow:0 16px 40px rgba(217,28,130,.45),0 0 0 6px rgba(201,162,75,.15);
+    margin-bottom:22px;flex-shrink:0;
+    transition:transform .3s;
+  }
+  .process-step:hover .process-num{transform:scale(1.12) translateY(-4px);}
+  .process-icon{font-size:1.6rem;margin-bottom:10px;}
+  .process-step h4{font-family:'Marcellus';color:var(--cream);font-size:1rem;margin-bottom:8px;}
+  .process-step p{font-size:.82rem;color:rgba(248,244,238,.65);line-height:1.6;}
+
+  /* ── PREMIUM 3D STATS BAND ── */
+  .stats-band{
+    padding:70px 0;
+    background:var(--cream-2);
+    position:relative;overflow:hidden;
+  }
+  .stats-band::before{content:"";position:absolute;top:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--magenta),var(--gold),var(--teal),var(--magenta));}
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:28px;
+    max-width:1100px;margin:0 auto;padding:0 28px;
+  }
+  .stat-card{
+    background:#fff;border-radius:24px;padding:38px 24px;text-align:center;
+    box-shadow:0 12px 36px rgba(59,22,56,.10);
+    position:relative;overflow:hidden;
+    transform-style:preserve-3d;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s;
+    opacity:0;
+    cursor:default;
+  }
+  .stat-card::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(217,28,130,.06),rgba(122,44,142,.04));
+    opacity:0;transition:opacity .3s;
+  }
+  .stat-card:hover::before{opacity:1;}
+  .stat-card:hover{transform:translateY(-10px) rotateX(4deg) rotateY(-2deg);box-shadow:0 30px 60px rgba(59,22,56,.18);}
+  .stat-icon{font-size:2rem;margin-bottom:12px;}
+  .stat-num{
+    font-family:'Cormorant Garamond';font-style:italic;
+    font-size:3.4rem;font-weight:600;
+    background:linear-gradient(135deg,var(--magenta),var(--purple));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    line-height:1;
+  }
+  .stat-label{font-size:.8rem;color:#7a5a78;margin-top:8px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;}
+
+  /* ── PREMIUM MATERIAL SHOWCASE ── */
+  .material-sec{
+    padding:110px 0;
+    background:var(--aubergine);
+    position:relative;overflow:hidden;
+  }
+  .material-sec .sec-head h2{color:var(--cream);}
+  .material-sec .sec-head p{color:rgba(248,244,238,.6);}
+  .material-sec .eyebrow{color:var(--gold);}
+  .material-sec .eyebrow::before{background:var(--gold);}
+
+  /* 3D floating fabric swatches */
+  .swatch-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+    max-width:1100px;margin:0 auto;padding:0 28px;
+  }
+  .swatch-card{
+    position:relative;border-radius:24px;overflow:hidden;
+    height:280px;cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+    opacity:0;
+  }
+  .swatch-card:hover{
+    transform:translateY(-12px) rotateX(5deg) rotateY(-5deg) scale(1.02);
+    box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 2px rgba(201,162,75,.4);
+  }
+  .swatch-bg{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    transition:transform .6s ease;
+  }
+  .swatch-card:hover .swatch-bg{transform:scale(1.08);}
+  .swatch-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(20,6,20,.92) 0%,rgba(20,6,20,.1) 50%,transparent 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:28px;
+  }
+  .swatch-tag{
+    display:inline-block;padding:4px 14px;background:rgba(201,162,75,.25);
+    border:1px solid rgba(201,162,75,.4);border-radius:30px;
+    font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);
+    margin-bottom:10px;backdrop-filter:blur(4px);
+    align-self:flex-start;
+  }
+  .swatch-card h3{font-family:'Cormorant Garamond';font-size:1.5rem;color:#fff;margin-bottom:4px;}
+  .swatch-card p{font-size:.8rem;color:rgba(255,255,255,.65);}
+
+  /* floating gold ring accents */
+  .float-ring{
+    position:absolute;border-radius:50%;pointer-events:none;opacity:.08;
+    border:1px solid var(--gold);animation:floatRing 10s ease-in-out infinite;
+  }
+  .float-ring-1{width:400px;height:400px;top:-100px;right:-100px;}
+  .float-ring-2{width:280px;height:280px;bottom:-60px;left:-60px;animation-delay:-4s;}
+  @keyframes floatRing{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-20px) rotate(8deg);}}
+
+  /* ── PARALLAX BANNERS ── */
+  .parallax-banner{position:relative;min-height:460px;display:flex;align-items:center;justify-content:center;overflow:hidden;perspective:1200px;}
+  .pb-photo{position:absolute;inset:-14% 0;background-size:cover;background-position:center;will-change:transform;}
+  .pb-tint{position:absolute;inset:0;background:linear-gradient(160deg,rgba(59,22,56,.88),rgba(122,44,142,.75));}
+  .pb-content{position:relative;z-index:2;text-align:center;padding:60px 28px;max-width:680px;will-change:transform;transform-style:preserve-3d;}
+  .pb-content .eyebrow{color:var(--gold);}
+  .pb-content h2{color:var(--cream);font-size:clamp(1.8rem,4vw,2.7rem);margin-top:14px;}
+  .pb-content p{color:#E4D3E2;margin:16px 0 28px;font-size:1rem;}
+
+  /* ── FEATURE STRIP ── */
+  .feature-strip{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:34px 0;position:relative;z-index:4;}
+  .feature-pill{background:#fff;padding:14px 26px;border-radius:40px;font-size:.85rem;font-weight:500;box-shadow:0 12px 28px rgba(59,22,56,.14);color:var(--aubergine);display:flex;align-items:center;gap:8px;}
+  .feature-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--magenta);}
+
+  /* ── GALLERY ── */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;gap:16px;}
+  .tilt-card{border-radius:16px;position:relative;overflow:hidden;cursor:pointer;background-size:cover;background-position:center;transform-style:preserve-3d;transition:box-shadow .3s;box-shadow:0 12px 26px rgba(59,22,56,.18);opacity:0;}
+  .tilt-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,6,20,.75) 0%,rgba(20,6,20,.05) 55%);}
+  .tilt-card .cap{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;font-family:'Cormorant Garamond';font-style:italic;font-size:1.05rem;}
+  .tilt-card:hover{box-shadow:0 30px 50px rgba(217,28,130,.35);}
+  .gallery .g1{grid-column:span 2;grid-row:span 2;}
+  .gallery .g4{grid-row:span 2;}
+
+  /* ── TESTIMONIALS ── */
+  .coverflow-wrap{position:relative;max-width:900px;margin:0 auto;opacity:0;}
+  .coverflow{position:relative;height:340px;perspective:1600px;overflow:hidden;}
+  .cf-card{position:absolute;top:0;left:50%;width:min(72vw,420px);height:100%;background:var(--cream-2);border-radius:20px;padding:34px 30px;box-shadow:0 20px 50px rgba(59,22,56,.18);transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,filter .5s;transform:translate(-50%,0) rotateY(0deg) translateZ(0) scale(1);opacity:0;pointer-events:none;}
+  .cf-card.active{opacity:1;pointer-events:auto;z-index:5;transform:translate(-50%,0) rotateY(0deg) translateZ(0) scale(1);}
+  .cf-card.prev{opacity:.55;z-index:3;filter:blur(1px);transform:translate(-135%,10px) rotateY(28deg) translateZ(-160px) scale(.86);}
+  .cf-card.next{opacity:.55;z-index:3;filter:blur(1px);transform:translate(35%,10px) rotateY(-28deg) translateZ(-160px) scale(.86);}
+  .cf-card.hide{opacity:0;pointer-events:none;}
+  .cf-card .quote-mark{font-family:'Cormorant Garamond';font-size:3.2rem;color:var(--magenta);opacity:.35;line-height:.5;display:block;margin-bottom:6px;}
+  .cf-card p.msg{font-size:.92rem;color:#5a4a58;}
+  .cf-card .who{margin-top:18px;display:flex;align-items:center;gap:12px;}
+  .cf-card .avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--magenta),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Marcellus';font-size:.9rem;}
+  .cf-card .name{font-size:.88rem;font-weight:600;color:var(--aubergine);}
+  .cf-card .loc{font-size:.76rem;color:#8a7a88;}
+  .cf-card .stars{color:var(--gold);font-size:.8rem;margin-top:10px;}
+  .cf-nav{display:flex;justify-content:center;gap:14px;margin-top:26px;}
+  .cf-nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--magenta);background:#fff;color:var(--magenta);font-size:1.1rem;cursor:pointer;transition:.25s;}
+  .cf-nav button:hover{background:var(--magenta);color:#fff;}
+
+  /* ── TRUST STRIP ── */
+  .trust-strip{background:linear-gradient(90deg,var(--magenta),var(--purple));padding:38px 0;}
+  .trust-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center;}
+  .trust-grid .t{color:#fff;}
+  .trust-grid .t .ic{font-size:1.5rem;margin-bottom:8px;}
+  .trust-grid .t p{font-size:.8rem;letter-spacing:.02em;}
+
+  /* ── FAQ ── */
+  .faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start;}
+  .faq-side h2{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--aubergine);}
+  .faq-side p{color:#6b5468;margin-top:14px;font-size:.94rem;}
+  .faq-item{border-bottom:1px solid #e6d8e0;padding:20px 0;}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Marcellus';font-size:1rem;color:var(--aubergine);}
+  .faq-q .plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--magenta);color:var(--magenta);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:.3s;}
+  .faq-item.open .faq-q .plus{transform:rotate(135deg);background:var(--magenta);color:#fff;}
+  .faq-a{max-height:0;overflow:hidden;transition:.35s ease;font-size:.88rem;color:#77677a;}
+  .faq-item.open .faq-a{max-height:200px;margin-top:12px;}
+
+  /* ── CONTACT ── */
+  .contact-cta{position:relative;overflow:hidden;padding:110px 28px;text-align:center;color:var(--cream);perspective:1200px;}
+  .contact-row{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-top:36px;font-size:.9rem;position:relative;z-index:2;}
+  .contact-row div{display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .contact-row .lbl{color:var(--gold);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;}
+
+  /* ── FOOTER ── */
+  footer{background:#26102A;color:#cbb7c8;padding:60px 0 24px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:34px;}
+  .footer-grid h4{color:#fff;font-size:.95rem;margin-bottom:16px;font-family:'Marcellus';}
+  .footer-grid a{display:block;font-size:.85rem;margin-bottom:10px;color:#cbb7c8;transition:.2s;}
+  .footer-grid a:hover{color:var(--gold);}
+  .footer-brand img{height:52px;margin-bottom:14px;border-radius:6px;}
+  .footer-brand p{font-size:.85rem;line-height:1.7;}
+  .app-badges{display:flex;gap:10px;margin-top:16px;}
+  .app-badges span{border:1px solid #4a3548;padding:8px 14px;border-radius:8px;font-size:.72rem;}
+  .footer-bottom{border-top:1px solid #3a2438;margin-top:44px;padding-top:22px;text-align:center;font-size:.78rem;color:#8a7488;}
+
+  .reveal{opacity:0;transform:perspective(1000px) translateY(36px) rotateX(8deg);transform-origin:top center;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in-view{opacity:1;transform:perspective(1000px) translateY(0) rotateX(0deg);}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:980px){
+    :root{--nav-h:76px;}
+    nav.links{position:fixed;top:0;right:-100%;height:100vh;width:78%;max-width:340px;background:var(--aubergine);flex-direction:column;justify-content:center;gap:30px;transition:.4s ease;padding:40px;}
+    nav.links.open{right:0;}
+    .burger{display:flex;}
+    .brand img{height:60px;}
+    #introAnimLogo img{width:160px;height:160px;}
+    .hero-inner{grid-template-columns:1fr;text-align:center;}
+    .hero p{margin-inline:auto;}
+    .hero-ctas{justify-content:center;}
+    .stage3d{height:360px;margin-top:20px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .trust-grid{grid-template-columns:repeat(2,1fr);gap:26px;}
+    .faq-wrap{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:repeat(2,1fr);}
+    .cf-card.prev{transform:translate(-120%,10px) rotateY(20deg) translateZ(-160px) scale(.8);}
+    .cf-card.next{transform:translate(20%,10px) rotateY(-20deg) translateZ(-160px) scale(.8);}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .swatch-grid{grid-template-columns:1fr 1fr;}
+    .process-track{flex-direction:column;gap:32px;}
+    .process-track::before{display:none;}
+  }
+  @media(max-width:560px){
+    :root{--nav-h:66px;}
+    .brand img{height:50px;}
+    #introAnimLogo img{width:130px;height:130px;}
+    .services-grid{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;}
+    .gallery .g1{grid-column:span 2;grid-row:span 1;height:220px;}
+    .trust-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .contact-row{gap:20px;}
+    .coverflow{height:400px;}
+    .cf-card.prev,.cf-card.next{opacity:0;pointer-events:none;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .swatch-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body class="intro-lock">
+
+<!-- INTRO ANIM LOGO (flies from center to navbar) -->
+<div id="introAnimLogo">
+  <img src="Logo.png" alt="">
+</div>
+
+<div id="introOverlay" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <div class="intro-tag">Vaagai Boutique Couture</div>
+</div>
+
+<header id="siteHeader">
+  <div class="brand"><img id="navLogo" src="Logo.png" alt="Vaagai Boutique Couture logo"></div>
+  <nav class="links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact" class="talk-btn">Let's Talk</a>
+  </nav>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="reveal in-view">
+      <span class="eyebrow">Chennai · Bespoke Tailoring</span>
+      <h1>Gorgeous, custom-fit blouses &amp; outfits <span>designed to make you shine.</span></h1>
+      <p>From aari embroidery to bridal lehengas — every stitch is cut, fitted and finished around your body, your day, your story.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-solid">Book a Fitting</a>
+        <a href="#gallery" class="btn-ghost">View Our Work</a>
+      </div>
+    </div>
+    <div class="stage3d reveal in-view" id="stage3d">
+      <div class="stage3d-inner" id="stageInner">
+        <div class="layer layer-glow"></div>
+        <div class="layer layer-photo">
+          <img src="right panel vagai.png" alt="Vaagai bridal blouse showcase" loading="lazy">
+        </div>
+        <div class="layer layer-chip"><span class="dot"></span>Perfect Fit Guaranteed</div>
+        <div class="layer layer-badge"><div class="num">12+</div><div class="lbl">Tailoring Services</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Aari Work Blouses</span><span>Machine Embroidery</span><span>Lining Blouses</span><span>Lehenga Stitching</span><span>Anarkali Stitching</span><span>Bridal Blouses</span>
+    <span>Aari Work Blouses</span><span>Machine Embroidery</span><span>Lining Blouses</span><span>Lehenga Stitching</span><span>Anarkali Stitching</span><span>Bridal Blouses</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What We Stitch</span>
+      <h2>Expert stitching for every occasion</h2>
+      <p>Hover a card to flip it — five custom tailoring services, precision-fit and finished by hand.</p>
+    </div>
+    <div class="services-grid">
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="icon">🪡</div><h3>Aari Work Blouses</h3></div><div class="flip-back"><h4>Aari Work</h4><p>Hand-embroidered thread &amp; bead work, stitch by stitch.</p></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="icon">🧵</div><h3>Machine Embroidery</h3></div><div class="flip-back"><h4>Machine Embroidery</h4><p>Precision motifs finished with a clean, modern edge.</p></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="icon">✂️</div><h3>Lining Blouses</h3></div><div class="flip-back"><h4>Lining Blouses</h4><p>Structured lining for a comfortable, all-day fit.</p></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="icon">🌸</div><h3>Pattern Blouses</h3></div><div class="flip-back"><h4>Pattern Blouses</h4><p>Bold patchwork &amp; floral patterns, made to order.</p></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="icon">👑</div><h3>Bridal Blouses</h3></div><div class="flip-back"><h4>Bridal Blouses</h4><p>Statement pieces for the biggest day of your life.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX BANNER 1 -->
+<section class="parallax-banner">
+  <div class="pb-photo" style="background-image:url('bridal.webp')"></div>
+  <div class="pb-tint"></div>
+  <div class="pb-content">
+    <span class="eyebrow">Stunning Outfits</span>
+    <h2>Tailoring designed to fit your style, personality &amp; grace</h2>
+    <p>From bridal blouses to flowing gowns — every piece is made to help you shine.</p>
+    <a href="#contact" class="btn-solid">Get In Touch</a>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<div class="container">
+  <div class="feature-strip">
+    <div class="feature-pill"><span class="dot"></span>Best-in-Class Design</div>
+    <div class="feature-pill"><span class="dot"></span>Designed to Match Your Style</div>
+    <div class="feature-pill"><span class="dot"></span>Trending &amp; Timeless Works</div>
+  </div>
+</div>
+
+<!-- ★ NEW: STATS BAND ★ -->
+<section class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon">👗</div><div class="stat-num">2400<span style="font-size:2rem">+</span></div><div class="stat-label">Blouses Stitched</div></div>
+      <div class="stat-card"><div class="stat-icon">💍</div><div class="stat-num">380<span style="font-size:2rem">+</span></div><div class="stat-label">Bridal Orders</div></div>
+      <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num">4.9</div><div class="stat-label">Google Rating</div></div>
+      <div class="stat-card"><div class="stat-icon">📅</div><div class="stat-num">8<span style="font-size:2rem">+</span></div><div class="stat-label">Years of Craft</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ★ NEW: HOW WE WORK — 3D PROCESS ★ -->
+<section class="process-sec">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Process</span>
+      <h2>From your dream to your doorstep</h2>
+      <p>Four seamless steps — every detail handled with couture-level care.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-step"><div class="process-num">1</div><div class="process-icon">📐</div><h4>Consultation</h4><p>We listen to your occasion, fabric choice &amp; design vision in detail.</p></div>
+      <div class="process-step"><div class="process-num">2</div><div class="process-icon">📏</div><h4>Measurement</h4><p>Precise body measurements taken at our studio or via home visit.</p></div>
+      <div class="process-step"><div class="process-num">3</div><div class="process-icon">🧵</div><h4>Handcrafting</h4><p>Skilled artisans cut, embroider &amp; stitch every piece with care.</p></div>
+      <div class="process-step"><div class="process-num">4</div><div class="process-icon">✨</div><h4>Fitting & Delivery</h4><p>Final trial fitting, alterations if needed, then perfect delivery.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ★ NEW: MATERIAL / FABRIC SHOWCASE ★ -->
+<section class="material-sec">
+  <div class="float-ring float-ring-1"></div>
+  <div class="float-ring float-ring-2"></div>
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Specialties</span>
+      <h2>Crafted in the finest traditions</h2>
+      <p>Three signature techniques that define every Vaagai piece.</p>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch-card">
+        <div class="swatch-bg" style="background:linear-gradient(135deg,#2d0e20 0%,#7a2c4a 50%,#c9524e 100%);"></div>
+        <div class="swatch-overlay">
+          <span class="swatch-tag">Signature</span>
+          <h3>Aari Thread Work</h3>
+          <p>Ancient hook-needle technique — intricate, timeless, irreplaceable.</p>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-bg" style="background:linear-gradient(135deg,#0e1f2d 0%,#1a4a6e 50%,#2e8c87 100%);"></div>
+        <div class="swatch-overlay">
+          <span class="swatch-tag">Premium</span>
+          <h3>Zardozi Embroidery</h3>
+          <p>Gold &amp; silver thread craft passed down through royal courts.</p>
+        </div>
+      </div>
+      <div class="swatch-card">
+        <div class="swatch-bg" style="background:linear-gradient(135deg,#1a1208 0%,#6b4c0e 50%,#c9a24b 100%);"></div>
+        <div class="swatch-overlay">
+          <span class="swatch-tag">Bespoke</span>
+          <h3>Bridal Couture</h3>
+          <p>Head-to-toe bridal styling — lehenga, blouse, dupatta, jewellery drape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec" id="gallery">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Gallery</span>
+      <h2>Unique designs, perfect patterns</h2>
+      <p>Tilt over a photo — a glimpse of blouses &amp; outfits stitched for our customers.</p>
+    </div>
+    <div class="gallery">
+      <div class="tilt-card g1" style="background-image:url('aari.webp')"><span class="cap">Aari Hand Embroidery</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1610047520958-b42ebcd2f6cb?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Ivory Floral Sari</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1629118477133-b8b1499f2b8a?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Floral Patchwork</span></div>
+      <div class="tilt-card g4" style="background-image:url('bridal.webp')"><span class="cap">Bridal Couture Detail</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1587271315307-eaebc181c749?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Red &amp; Gold Weave</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1631549424057-403e75d68e2f?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Floral Hair Drape</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1617633150878-7df1d12a9a57?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Rani Pink Silk</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX BANNER 2 -->
+<section class="parallax-banner">
+  <div class="pb-photo" style="background-image:url('https://images.unsplash.com/photo-1570212773364-e30cd076539e?fm=jpg&q=75&w=1400&auto=format&fit=crop')"></div>
+  <div class="pb-tint" style="background:linear-gradient(160deg,rgba(59,22,56,.9),rgba(46,140,135,.55));"></div>
+  <div class="pb-content">
+    <span class="eyebrow">Happy Customers</span>
+    <h2>Every fitting is a promise — perfect, on time, unmistakably yours</h2>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2>Happy customers' words</h2>
+      <p>Our expert tailoring and perfect fits have won hearts.</p>
+    </div>
+    <div class="coverflow-wrap">
+      <div class="coverflow" id="coverflow">
+        <div class="cf-card" data-i="0"><span class="quote-mark">"</span><p class="msg">Vaagai brought my dream bridal blouse to life. The fit was perfect and the tiny details made me feel like a queen on my big day.</p><div class="stars">★★★★★</div><div class="who"><div class="avatar">S</div><div><div class="name">Shriya S.</div><div class="loc">Chennai</div></div></div></div>
+        <div class="cf-card" data-i="1"><span class="quote-mark">"</span><p class="msg">I love how they customised my gown exactly the way I wanted for my brother's wedding. The stitching was beautiful — I received so many compliments.</p><div class="stars">★★★★★</div><div class="who"><div class="avatar">M</div><div><div class="name">Meena R.</div><div class="loc">Anna Nagar</div></div></div></div>
+        <div class="cf-card" data-i="2"><span class="quote-mark">"</span><p class="msg">Gave all three blouses for my wedding and one lehenga for the reception to the Vaagai team. They listened and delivered exactly what I asked for.</p><div class="stars">★★★★★</div><div class="who"><div class="avatar">R</div><div><div class="name">Raji K.</div><div class="loc">T. Nagar</div></div></div></div>
+      </div>
+      <div class="cf-nav"><button id="cfPrev">‹</button><button id="cfNext">›</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="t"><div class="ic">✦</div><p>Premium Quality Work</p></div>
+      <div class="t"><div class="ic">✓</div><p>Perfect Fit Guarantee</p></div>
+      <div class="t"><div class="ic">♥</div><p>Customer Satisfaction</p></div>
+      <div class="t"><div class="ic">⏱</div><p>On-Time Delivery</p></div>
+      <div class="t"><div class="ic">✎</div><p>Personalized Service</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="container">
+    <div class="faq-wrap">
+      <div class="faq-side reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Your questions, our answers</h2>
+        <p>Got any queries about our tailoring services? Here's what customers ask us most.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open"><div class="faq-q"><span>What types of outfits do you stitch?</span><span class="plus">+</span></div><div class="faq-a">We stitch blouses, lehengas, gowns, salwars and more — customised to your style and fit.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Can I bring my own fabric?</span><span class="plus">+</span></div><div class="faq-a">Yes — bring your own fabric or choose from our curated collection.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>How long does an order take?</span><span class="plus">+</span></div><div class="faq-a">Most pieces take 7–14 days depending on the embroidery and detailing involved.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Do you offer custom embroidery?</span><span class="plus">+</span></div><div class="faq-a">Absolutely — aari, zardozi and machine embroidery are all available on request.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Do you offer alterations?</span><span class="plus">+</span></div><div class="faq-a">Yes, we offer free alterations within 7 days of delivery if the fit isn't perfect.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="contact-cta" id="contact">
+  <div class="pb-photo" style="background-image:url('luxury-bg.webp')"></div>
+  <div class="pb-tint"></div>
+  <div class="pb-content" style="max-width:none;">
+    <span class="eyebrow" style="color:var(--gold)">Get In Touch</span>
+    <h2 style="color:var(--cream);font-size:clamp(1.8rem,4vw,2.6rem);margin-top:14px;">Let's stitch something beautiful together</h2>
+    <p style="color:#E4D3E2;max-width:520px;margin:16px auto 30px;">Tell us your occasion, fabric and fit — we'll take care of the rest.</p>
+    <a href="#" class="btn-solid">Book a Consultation</a>
+    <div class="contact-row">
+      <div><span class="lbl">Call</span>+91 91761 48414</div>
+      <div><span class="lbl">Email</span>vaagaiboutiq@gmail.com</div>
+      <div><span class="lbl">Studio</span>Chennai, Tamil Nadu</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="Logo.png" alt="Vaagai Boutique Couture">
+        <p>Custom tailoring for blouses, lehengas &amp; bridalwear — embrace, empower and elevate your fem'nity.</p>
+        <div class="app-badges"><span>▸ Google Play</span><span>▸ App Store</span></div>
+      </div>
+      <div><h4>Quick Menu</h4><a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></div>
+      <div><h4>Blouses</h4><a href="#">Aari Work</a><a href="#">Machine Embroidery</a><a href="#">Bridal Blouses</a><a href="#">Lehenga Stitching</a></div>
+      <div><h4>Contact</h4><a href="tel:+919176148414">+91 91761 48414</a><a href="mailto:vaagaiboutiq@gmail.com">vaagaiboutiq@gmail.com</a><a href="#">Instagram · Facebook · YouTube</a></div>
+    </div>
+    <div class="footer-bottom">© 2026 Vaagai Boutique Couture. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(window.gsap && window.ScrollTrigger){ gsap.registerPlugin(ScrollTrigger); }
+
+  /* ═══════════════════════════════════════════════════════
+     INTRO — FIX 2:
+     Logo appears BIG in center → stays visible → smoothly
+     flies to exact navbar logo position → fades out just
+     as the real navbar logo fades in. No spin, no disappear.
+  ═══════════════════════════════════════════════════════ */
+  (function initIntro(){
+    const body       = document.body;
+    const overlay    = document.getElementById('introOverlay');
+    const animLogo   = document.getElementById('introAnimLogo');
+    const siteHeader = document.getElementById('siteHeader');
+    const navLogo    = document.getElementById('navLogo');
+
+    function finishIntro(){
+      /* show navbar */
+      siteHeader.style.transition = 'opacity .3s ease';
+      siteHeader.style.opacity    = '1';
+      siteHeader.style.pointerEvents = 'auto';
+      body.classList.remove('intro-lock');
+      /* remove overlay */
+      if(overlay){
+        overlay.style.transition = 'opacity .4s ease';
+        overlay.style.opacity    = '0';
+        setTimeout(() => overlay.remove(), 450);
+      }
+      /* remove flying logo */
+      animLogo.style.transition = 'opacity .25s ease';
+      animLogo.style.opacity    = '0';
+      setTimeout(() => animLogo.remove(), 300);
+      if(window.ScrollTrigger) ScrollTrigger.refresh();
+    }
+
+    if(reduceMotion || !window.gsap){
+      finishIntro();
+      return;
+    }
+
+    /* hide real nav logo until flying logo arrives */
+    navLogo.style.opacity = '0';
+
+    const tl = gsap.timeline({ delay: .1 });
+
+    /* 1. Fade in big centered logo */
+    tl.fromTo(animLogo,
+      { opacity: 0, scale: .7 },
+      { opacity: 1, scale: 1, duration: .85, ease: 'back.out(1.4)' })
+
+    /* 2. Gentle pulse so it feels alive */
+    .to(animLogo,
+      { scale: 1.05, duration: .5, ease: 'sine.inOut', yoyo: true, repeat: 1 }, '+=.2')
+
+    /* 3. Smooth flight to navbar slot */
+    .add(function(){
+      const navRect  = navLogo.getBoundingClientRect();
+      const logoRect = animLogo.getBoundingClientRect();
+
+      /* target: top-left corner of the nav logo slot */
+      const targetX = navRect.left;
+      const targetY = navRect.top;
+      /* current top-left */
+      const currentX = logoRect.left;
+      const currentY = logoRect.top;
+      /* scale factor */
+      const scaleRatio = navRect.width / logoRect.width;
+
+      gsap.to(animLogo, {
+        /* move top-left to match nav slot, then scale */
+        x: targetX - currentX,
+        y: targetY - currentY,
+        scale: scaleRatio,
+        transformOrigin: 'top left',
+        duration: 1.0,
+        ease: 'power3.inOut',
+        onStart: function(){
+          /* overlay fades during flight */
+          overlay.style.transition = 'opacity .6s ease';
+          overlay.style.opacity = '0';
+        },
+        onComplete: function(){
+          /* real nav logo fades in as flying logo fades out */
+          navLogo.style.transition = 'opacity .25s ease';
+          navLogo.style.opacity    = '1';
+          finishIntro();
+        }
+      });
+    });
+  })();
+
+  /* ═══════════════════════════════════════════════════════
+     HEADER + NAV
+  ═══════════════════════════════════════════════════════ */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+  const burger   = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in-view'); });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* hero 3D tilt */
+  const stage = document.getElementById('stage3d');
+  const stageInner = document.getElementById('stageInner');
+  if(stage && finePointer && !reduceMotion){
+    stage.addEventListener('mousemove', e => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      stageInner.style.transform = `rotateY(${x*18}deg) rotateX(${-y*18}deg)`;
+    });
+    stage.addEventListener('mouseleave', () => { stageInner.style.transform = ''; });
+  }
+
+  /* gallery tilt */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.04)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* stat cards 3D hover */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.stat-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-10px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* swatch cards 3D hover */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.swatch-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${x*12}deg) rotateX(${-y*12}deg) translateY(-12px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  /* floating badge/chip */
+  if(window.gsap && !reduceMotion){
+    [{sel:'.layer-badge',amp:10,dur:3.2},{sel:'.layer-chip',amp:8,dur:2.6},{sel:'.layer-glow',amp:14,dur:4}]
+    .forEach(({sel,amp,dur}) => {
+      const el = document.querySelector(sel);
+      if(el) gsap.to(el,{y:`+=${amp}`,duration:dur,ease:'sine.inOut',yoyo:true,repeat:-1});
+    });
+  }
+
+  /* feature pills tilt */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.feature-pill').forEach(pill => {
+      pill.style.transition = 'transform .2s ease';
+      pill.addEventListener('mousemove', e => {
+        const r = pill.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        pill.style.transform = `perspective(500px) rotateX(${-y*14}deg) rotateY(${x*14}deg) translateZ(6px)`;
+      });
+      pill.addEventListener('mouseleave', () => { pill.style.transform = ''; });
+    });
+  }
+
+  /* coverflow */
+  const cards = Array.from(document.querySelectorAll('.cf-card'));
+  let active = 0;
+  function renderCoverflow(){
+    cards.forEach((c,i) => {
+      c.classList.remove('active','prev','next','hide');
+      if(i===active) c.classList.add('active');
+      else if(i===(active-1+cards.length)%cards.length) c.classList.add('prev');
+      else if(i===(active+1)%cards.length) c.classList.add('next');
+      else c.classList.add('hide');
+    });
+  }
+  document.getElementById('cfPrev').addEventListener('click',()=>{active=(active-1+cards.length)%cards.length;renderCoverflow();});
+  document.getElementById('cfNext').addEventListener('click',()=>{active=(active+1)%cards.length;renderCoverflow();});
+  renderCoverflow();
+  setInterval(()=>{active=(active+1)%cards.length;renderCoverflow();},6000);
+
+  /* ═══════════════════════════════════════════════════════
+     GSAP SCROLLTRIGGER
+  ═══════════════════════════════════════════════════════ */
+  if(window.gsap && window.ScrollTrigger && !reduceMotion){
+
+    /* Hero depth scroll */
+    const heroSection = document.querySelector('.hero');
+    const heroText    = document.querySelector('.hero-inner > div.reveal');
+    const heroImage   = document.querySelector('.stage3d');
+    if(heroSection && heroText && heroImage){
+      gsap.timeline({scrollTrigger:{trigger:heroSection,start:'top top',end:'bottom top',scrub:1}})
+        .to(heroText,  {y:-110,z:-240,rotateX:11,opacity:.12,ease:'none'},0)
+        .to(heroImage, {y:-160,z:-420,rotateY:-22,rotateX:11,scale:.82,opacity:.1,ease:'none'},0);
+    }
+
+    /* Parallax banners */
+    document.querySelectorAll('.parallax-banner,.contact-cta').forEach(section => {
+      const photo   = section.querySelector('.pb-photo');
+      const content = section.querySelector('.pb-content');
+      if(!photo||!content) return;
+      gsap.timeline({scrollTrigger:{trigger:section,start:'top bottom',end:'bottom top',scrub:1}})
+        .fromTo(photo,   {scale:1.05,yPercent:-6},{scale:1.25,yPercent:6,ease:'none'},0)
+        .fromTo(content, {y:80,z:-180,rotateX:14,opacity:.35},{y:0,z:0,rotateX:0,opacity:1,ease:'none'},0)
+        .to(content,     {y:-100,z:-220,rotateX:-14,opacity:.3,ease:'none'}, .55);
+    });
+
+    /* Flip cards */
+    gsap.utils.toArray('.flip-card').forEach((card,i) => {
+      gsap.fromTo(card,
+        {opacity:0,y:60,rotateX:55,transformPerspective:900},
+        {opacity:1,y:0,rotateX:0,duration:.9,ease:'power3.out',delay:(i%5)*.06,
+          scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+    });
+
+    /* Gallery */
+    gsap.utils.toArray('.tilt-card').forEach((card,i) => {
+      const dir = i%2===0?-1:1;
+      gsap.fromTo(card,
+        {opacity:0,rotateY:dir*35,z:-220,transformPerspective:1000},
+        {opacity:1,rotateY:0,z:0,duration:1,ease:'power3.out',delay:(i%4)*.07,
+          scrollTrigger:{trigger:card,start:'top 90%',toggleActions:'play none none reverse'}});
+    });
+
+    /* Stat cards stagger rise */
+    gsap.utils.toArray('.stat-card').forEach((card,i) => {
+      gsap.fromTo(card,
+        {opacity:0,y:50,rotateX:30,transformPerspective:800},
+        {opacity:1,y:0,rotateX:0,duration:.8,ease:'power3.out',delay:i*.1,
+          scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+    });
+
+    /* Swatch cards */
+    gsap.utils.toArray('.swatch-card').forEach((card,i) => {
+      gsap.fromTo(card,
+        {opacity:0,y:60,rotateY:i===1?0:i===0?-20:20,transformPerspective:1000},
+        {opacity:1,y:0,rotateY:0,duration:1,ease:'power3.out',delay:i*.12,
+          scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+    });
+
+    /* Process steps */
+    gsap.utils.toArray('.process-step').forEach((step,i) => {
+      gsap.fromTo(step,
+        {opacity:0,y:40,scale:.92},
+        {opacity:1,y:0,scale:1,duration:.7,ease:'power3.out',delay:i*.15,
+          scrollTrigger:{trigger:step,start:'top 88%',toggleActions:'play none none reverse'}});
+    });
+
+    /* Coverflow */
+    const cfWrap = document.querySelector('.coverflow-wrap');
+    if(cfWrap){
+      gsap.fromTo(cfWrap,
+        {opacity:0,rotateX:22,y:70,transformPerspective:1000},
+        {opacity:1,rotateX:0,y:0,duration:1,ease:'power3.out',
+          scrollTrigger:{trigger:cfWrap,start:'top 85%',toggleActions:'play none none reverse'}});
+    }
+
+  } else {
+    document.querySelectorAll('.flip-card,.tilt-card,.coverflow-wrap,.stat-card,.swatch-card,.process-step').forEach(el=>{
+      el.style.opacity='1';
+    });
+  }
+</script>
+</body>
+</html>

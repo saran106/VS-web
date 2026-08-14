@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaagai Boutique Couture — Bridal & Custom Blouse Stitching, Chennai</title>
+<link rel="icon" href="Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --aubergine:#3B1638;
+    --aubergine-2:#4E1F49;
+    --magenta:#D91C82;
+    --purple:#7A2C8E;
+    --gold:#C9A24B;
+    --teal:#2E8C87;
+    --cream:#FBF4EE;
+    --cream-2:#F3E9DE;
+    --ink:#2A1728;
+    /* FIX 3: navbar height variable — used for scroll-margin-top */
+    --nav-h: 80px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%;}
+  body{
+    font-family:'Jost', sans-serif; color:var(--ink); background:var(--cream);
+    overflow-x:hidden; width:100%; font-weight:300; line-height:1.6;
+  }
+  body.intro-lock{ overflow:hidden; height:100vh; }
+  h1,h2,h3,h4{font-family:'Marcellus', serif; font-weight:400; letter-spacing:.01em;}
+  a{text-decoration:none; color:inherit;}
+  img{max-width:100%; display:block;}
+  .container{max-width:1220px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-size:.72rem; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--magenta); font-weight:600; display:inline-flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--magenta); display:inline-block;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001s !important; transition-duration:.001s !important;}
+    #introOverlay{display:none !important;}
+  }
+
+  /* ---------- INTRO ---------- */
+  #introOverlay{
+    position:fixed; inset:0; z-index:99999; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg, #F8F1F8 0%, #FBF4EE 45%, #F3E9DE 100%); overflow:hidden;
+  }
+  .intro-bg{ position:absolute; inset:0; background:url('luxury-bg.webp') center/cover no-repeat; opacity:.9; }
+  .intro-bg::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(255,255,255,0) 0%, rgba(251,244,238,.6) 80%);
+  }
+  .intro-stage{ position:relative; width:min(80vw,640px); height:min(80vw,640px); perspective:1400px; z-index:2; }
+  .intro-stage img{
+    position:absolute; inset:0; margin:auto; max-width:92%; max-height:92%; object-fit:contain;
+    will-change:transform, opacity; backface-visibility:hidden;
+  }
+  #introLogo{ opacity:0; filter:drop-shadow(0 20px 42px rgba(59,22,56,.28)); }
+  .intro-tag{
+    position:absolute; bottom:8%; left:0; right:0; text-align:center; z-index:2;
+    color:var(--aubergine); font-size:.72rem; letter-spacing:.3em; text-transform:uppercase; opacity:.6;
+  }
+  @media (max-width:560px){
+    .intro-stage{ width:min(88vw,420px); height:min(88vw,420px); }
+  }
+
+  /* ---------- NAV ---------- */
+  /* FIX 2 & 3: Navbar height fixed, logo size increased */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 28px;
+    height: var(--nav-h);           /* FIX 3: explicit fixed height */
+    transition:.35s ease; background:transparent;
+    opacity:0; pointer-events:none;
+  }
+  header.scrolled{ background:rgba(59,22,56,.92); backdrop-filter:blur(8px); box-shadow:0 6px 24px rgba(0,0,0,.18); }
+
+  /* FIX 2: Logo size — bigger across all screens */
+  .brand img{
+    height: 64px;                   /* desktop — was 120px but overflowed; 64px fits cleanly */
+    width: auto;
+    border-radius:6px;
+    transition: height 0.3s ease;
+  }
+
+  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links a{ font-size:.86rem; letter-spacing:.03em; color:var(--cream); position:relative; padding:4px 0; }
+  nav.links a::after{ content:""; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--gold); transition:.3s; }
+  nav.links a:hover::after{width:100%;}
+  .talk-btn{
+    background:linear-gradient(120deg, var(--magenta), var(--purple)); color:#fff !important;
+    padding:10px 24px; border-radius:30px; font-size:.82rem; letter-spacing:.05em;
+    box-shadow:0 8px 20px rgba(217,28,130,.35); transition:.3s;
+  }
+  .talk-btn:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(217,28,130,.45);}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:1001;}
+  .burger span{width:26px; height:2px; background:var(--cream); display:block;}
+
+  /* FIX 3: All sections get scroll-margin-top = nav height so nav doesn't cover them */
+  section[id], div[id] {
+    scroll-margin-top: var(--nav-h);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden;
+    background:radial-gradient(ellipse at 75% 20%, rgba(217,28,130,.30), transparent 55%),
+               radial-gradient(ellipse at 15% 85%, rgba(46,140,135,.25), transparent 50%),
+               linear-gradient(160deg, var(--aubergine) 0%, var(--aubergine-2) 55%, #2A1032 100%);
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0; opacity:.10; pointer-events:none;
+    background-image:radial-gradient(circle, var(--gold) 1.4px, transparent 1.4px); background-size:26px 26px;
+  }
+  .hero-inner{
+    position:relative; z-index:2; padding:150px 28px 90px; max-width:1220px; margin:0 auto;
+    display:grid; grid-template-columns:1fr .95fr; gap:40px; align-items:center;
+    perspective:1400px;
+  }
+  .hero h1{ color:var(--cream); font-size:clamp(2.1rem, 4.2vw, 3.4rem); line-height:1.15; max-width:620px; }
+  .hero h1 span{color:var(--gold);}
+  .hero p{color:#E9DCE6; max-width:470px; margin-top:22px; font-size:1.02rem;}
+  .hero-ctas{display:flex; gap:16px; margin-top:34px; flex-wrap:wrap;}
+  .btn-solid{
+    background:linear-gradient(120deg, var(--magenta), var(--purple)); color:#fff;
+    padding:15px 30px; border-radius:32px; font-size:.9rem; letter-spacing:.04em;
+    box-shadow:0 10px 26px rgba(217,28,130,.35); transition:.3s; display:inline-block;
+  }
+  .btn-solid:hover{transform:translateY(-3px);}
+  .btn-ghost{ border:1px solid rgba(255,255,255,.5); color:var(--cream); padding:15px 30px; border-radius:32px; font-size:.9rem; letter-spacing:.04em; transition:.3s; }
+  .btn-ghost:hover{background:rgba(255,255,255,.12); border-color:var(--gold);}
+
+  .stage3d{ perspective:1400px; height:480px; position:relative; }
+  .stage3d-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .12s ease-out; will-change:transform; }
+  .layer{ position:absolute; transform-style:preserve-3d; }
+  .layer-glow{
+    inset:-40px; border-radius:50%; transform:translateZ(-160px) scale(1.15);
+    background:radial-gradient(circle, rgba(217,28,130,.45), transparent 65%); filter:blur(10px);
+  }
+  .layer-photo{
+    inset:40px 60px 40px 20px; transform:translateZ(20px); border-radius:22px; overflow:hidden;
+    box-shadow:0 40px 70px rgba(0,0,0,.45), 0 0 0 6px rgba(255,255,255,.08), 0 0 0 8px rgba(201,162,75,.5);
+  }
+  .layer-photo img{ width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .layer-badge{
+    right:-6px; bottom:18px; transform:translateZ(90px); width:158px; text-align:center;
+    background:linear-gradient(135deg, var(--magenta), var(--purple)); color:#fff; border-radius:16px;
+    padding:18px 14px; box-shadow:0 26px 46px rgba(217,28,130,.4); border:1px solid rgba(255,255,255,.25);
+  }
+  .layer-badge .num{ font-family:'Cormorant Garamond'; font-style:italic; font-size:1.8rem; color:var(--gold); }
+  .layer-badge .lbl{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; margin-top:2px; }
+  .layer-chip{
+    left:-18px; top:6px; transform:translateZ(70px); background:#fff; border-radius:14px; padding:12px 16px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25); display:flex; align-items:center; gap:10px; font-size:.8rem; color:var(--aubergine); font-weight:500;
+  }
+  .layer-chip .dot{width:9px; height:9px; border-radius:50%; background:var(--teal);}
+  .scroll-cue{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:var(--cream);
+    display:flex; flex-direction:column; align-items:center; gap:8px; font-size:.7rem; letter-spacing:.2em;
+    text-transform:uppercase; opacity:.75; z-index:3;
+  }
+  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--gold), transparent); animation:down 1.6s ease-in-out infinite;}
+  @keyframes down{ 0%{transform:scaleY(0); transform-origin:top;} 50%{transform:scaleY(1); transform-origin:top;} 51%{transform-origin:bottom;} 100%{transform:scaleY(0); transform-origin:bottom;} }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{ background:linear-gradient(90deg, var(--magenta), var(--purple)); color:#fff; padding:16px 0; overflow:hidden; white-space:nowrap; position:relative; z-index:3; }
+  .marquee-track{display:inline-block; animation:scroll-left 26s linear infinite;}
+  .marquee-track span{font-family:'Marcellus'; font-size:1rem; letter-spacing:.04em; margin:0 26px;}
+  .marquee-track span::after{content:"✦"; margin-left:26px; color:var(--gold);}
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .sec{padding:100px 0;}
+  .sec-head{text-align:center; max-width:640px; margin:0 auto 56px;}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem); margin-top:14px; color:var(--aubergine);}
+  .sec-head p{color:#6b5468; margin-top:14px; font-size:.98rem;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:22px; }
+  .flip-card{ height:250px; perspective:1200px; opacity:0; }
+  .flip-inner{ position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+  .flip-card:hover .flip-inner{ transform:rotateY(180deg); }
+  .flip-front, .flip-back{
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:18px; padding:30px 20px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
+  .flip-front{ background:#fff; box-shadow:0 10px 30px rgba(59,22,56,.1); }
+  .flip-back{ background:linear-gradient(150deg, var(--magenta), var(--purple)); color:#fff; transform:rotateY(180deg); box-shadow:0 20px 40px rgba(217,28,130,.35); }
+  .flip-front .icon{
+    width:58px; height:58px; margin-bottom:16px; border-radius:50%; font-size:1.5rem;
+    background:linear-gradient(135deg, rgba(217,28,130,.12), rgba(122,44,142,.12));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .flip-front h3{font-size:1.02rem; color:var(--aubergine);}
+  .flip-back h4{font-family:'Marcellus'; font-size:1rem; margin-bottom:10px;}
+  .flip-back p{font-size:.82rem; opacity:.92;}
+
+  /* ---------- PARALLAX BANNERS ---------- */
+  .parallax-banner{ position:relative; min-height:460px; display:flex; align-items:center; justify-content:center; overflow:hidden; perspective:1200px; }
+  .pb-photo{ position:absolute; inset:-14% 0; background-size:cover; background-position:center; will-change:transform; }
+  .pb-tint{ position:absolute; inset:0; background:linear-gradient(160deg, rgba(59,22,56,.88), rgba(122,44,142,.75)); }
+  .pb-content{ position:relative; z-index:2; text-align:center; padding:60px 28px; max-width:680px; will-change:transform; transform-style:preserve-3d; }
+  .pb-content .eyebrow{color:var(--gold);}
+  .pb-content h2{ color:var(--cream); font-size:clamp(1.8rem,4vw,2.7rem); margin-top:14px; }
+  .pb-content p{ color:#E4D3E2; margin:16px 0 28px; font-size:1rem; }
+
+  /* ---------- FEATURE STRIP ---------- */
+  .feature-strip{ display:flex; justify-content:center; gap:18px; flex-wrap:wrap; padding:34px 0; position:relative; z-index:4; }
+  .feature-pill{ background:#fff; padding:14px 26px; border-radius:40px; font-size:.85rem; font-weight:500; box-shadow:0 12px 28px rgba(59,22,56,.14); color:var(--aubergine); display:flex; align-items:center; gap:8px; }
+  .feature-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--magenta);}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{ display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:170px; gap:16px; }
+  .tilt-card{
+    border-radius:16px; position:relative; overflow:hidden; cursor:pointer;
+    background-size:cover; background-position:center; transform-style:preserve-3d;
+    transition:box-shadow .3s; box-shadow:0 12px 26px rgba(59,22,56,.18);
+    opacity:0;
+  }
+  .tilt-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,6,20,.75) 0%, rgba(20,6,20,.05) 55%); }
+  .tilt-card .cap{ position:absolute; left:14px; bottom:12px; z-index:2; color:#fff; font-family:'Cormorant Garamond'; font-style:italic; font-size:1.05rem; }
+  .tilt-card:hover{ box-shadow:0 30px 50px rgba(217,28,130,.35); }
+  .gallery .g1{grid-column:span 2; grid-row:span 2;}
+  .gallery .g4{grid-row:span 2;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .coverflow-wrap{ position:relative; max-width:900px; margin:0 auto; opacity:0; }
+  .coverflow{ position:relative; height:340px; perspective:1600px; overflow:hidden; }
+  .cf-card{
+    position:absolute; top:0; left:50%; width:min(72vw,420px); height:100%;
+    background:var(--cream-2); border-radius:20px; padding:34px 30px; box-shadow:0 20px 50px rgba(59,22,56,.18);
+    transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s, filter .5s;
+    transform:translate(-50%,0) rotateY(0deg) translateZ(0) scale(1); opacity:0; pointer-events:none;
+  }
+  .cf-card.active{ opacity:1; pointer-events:auto; z-index:5; transform:translate(-50%,0) rotateY(0deg) translateZ(0) scale(1); }
+  .cf-card.prev{ opacity:.55; z-index:3; filter:blur(1px); transform:translate(-135%,10px) rotateY(28deg) translateZ(-160px) scale(.86); }
+  .cf-card.next{ opacity:.55; z-index:3; filter:blur(1px); transform:translate(35%,10px) rotateY(-28deg) translateZ(-160px) scale(.86); }
+  .cf-card.hide{ opacity:0; pointer-events:none; }
+  .cf-card .quote-mark{ font-family:'Cormorant Garamond'; font-size:3.2rem; color:var(--magenta); opacity:.35; line-height:.5; display:block; margin-bottom:6px; }
+  .cf-card p.msg{ font-size:.92rem; color:#5a4a58; }
+  .cf-card .who{margin-top:18px; display:flex; align-items:center; gap:12px;}
+  .cf-card .avatar{ width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--magenta),var(--gold)); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Marcellus'; font-size:.9rem; }
+  .cf-card .name{font-size:.88rem; font-weight:600; color:var(--aubergine);}
+  .cf-card .loc{font-size:.76rem; color:#8a7a88;}
+  .cf-card .stars{color:var(--gold); font-size:.8rem; margin-top:10px;}
+  .cf-nav{ display:flex; justify-content:center; gap:14px; margin-top:26px; }
+  .cf-nav button{
+    width:42px; height:42px; border-radius:50%; border:1px solid var(--magenta); background:#fff; color:var(--magenta);
+    font-size:1.1rem; cursor:pointer; transition:.25s;
+  }
+  .cf-nav button:hover{ background:var(--magenta); color:#fff; }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust-strip{ background:linear-gradient(90deg, var(--magenta), var(--purple)); padding:38px 0; }
+  .trust-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:20px; text-align:center;}
+  .trust-grid .t{color:#fff;}
+  .trust-grid .t .ic{font-size:1.5rem; margin-bottom:8px;}
+  .trust-grid .t p{font-size:.8rem; letter-spacing:.02em;}
+
+  /* ---------- FAQ ---------- */
+  .faq-wrap{display:grid; grid-template-columns:.8fr 1.2fr; gap:50px; align-items:start;}
+  .faq-side h2{font-size:clamp(1.6rem,3vw,2.2rem); color:var(--aubergine);}
+  .faq-side p{color:#6b5468; margin-top:14px; font-size:.94rem;}
+  .faq-item{border-bottom:1px solid #e6d8e0; padding:20px 0;}
+  .faq-q{ display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:'Marcellus'; font-size:1rem; color:var(--aubergine); }
+  .faq-q .plus{ width:26px; height:26px; border-radius:50%; border:1px solid var(--magenta); color:var(--magenta); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; transition:.3s; }
+  .faq-item.open .faq-q .plus{transform:rotate(135deg); background:var(--magenta); color:#fff;}
+  .faq-a{max-height:0; overflow:hidden; transition:.35s ease; font-size:.88rem; color:#77677a;}
+  .faq-item.open .faq-a{max-height:200px; margin-top:12px;}
+
+  /* ---------- CONTACT CTA ---------- */
+  .contact-cta{ position:relative; overflow:hidden; padding:110px 28px; text-align:center; color:var(--cream); perspective:1200px; }
+  .contact-row{display:flex; justify-content:center; gap:34px; flex-wrap:wrap; margin-top:36px; font-size:.9rem; position:relative; z-index:2;}
+  .contact-row div{display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .contact-row .lbl{color:var(--gold); font-size:.72rem; letter-spacing:.15em; text-transform:uppercase;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#26102A; color:#cbb7c8; padding:60px 0 24px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:34px;}
+  .footer-grid h4{color:#fff; font-size:.95rem; margin-bottom:16px; font-family:'Marcellus';}
+  .footer-grid a{display:block; font-size:.85rem; margin-bottom:10px; color:#cbb7c8; transition:.2s;}
+  .footer-grid a:hover{color:var(--gold);}
+  .footer-brand img{height:42px; margin-bottom:14px; border-radius:6px;}
+  .footer-brand p{font-size:.85rem; line-height:1.7;}
+  .app-badges{display:flex; gap:10px; margin-top:16px;}
+  .app-badges span{ border:1px solid #4a3548; padding:8px 14px; border-radius:8px; font-size:.72rem; }
+  .footer-bottom{ border-top:1px solid #3a2438; margin-top:44px; padding-top:22px; text-align:center; font-size:.78rem; color:#8a7488; }
+
+  .reveal{
+    opacity:0; transform:perspective(1000px) translateY(36px) rotateX(8deg); transform-origin:top center;
+    transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.in-view{opacity:1; transform:perspective(1000px) translateY(0) rotateX(0deg);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    :root { --nav-h: 70px; }
+    nav.links{ position:fixed; top:0; right:-100%; height:100vh; width:78%; max-width:340px; background:var(--aubergine); flex-direction:column; justify-content:center; gap:30px; transition:.4s ease; padding:40px; }
+    nav.links.open{right:0;}
+    .burger{display:flex;}
+    /* FIX 2: Mobile logo size */
+    .brand img{ height: 54px; }
+    .hero-inner{grid-template-columns:1fr; text-align:center;}
+    .hero p{margin-inline:auto;}
+    .hero-ctas{justify-content:center;}
+    .stage3d{ height:360px; margin-top:20px; }
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .trust-grid{grid-template-columns:repeat(2,1fr); gap:26px;}
+    .faq-wrap{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:repeat(2,1fr);}
+    .cf-card.prev{transform:translate(-120%,10px) rotateY(20deg) translateZ(-160px) scale(.8);}
+    .cf-card.next{transform:translate(20%,10px) rotateY(-20deg) translateZ(-160px) scale(.8);}
+  }
+  @media (max-width:560px){
+    :root { --nav-h: 64px; }
+    /* FIX 2: Small mobile logo */
+    .brand img{ height: 46px; }
+    .services-grid{grid-template-columns:1fr;}
+    .gallery{grid-template-columns:1fr 1fr;}
+    .gallery .g1{grid-column:span 2; grid-row:span 1; height:220px;}
+    .trust-grid{grid-template-columns:1fr 1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .contact-row{gap:20px;}
+    .coverflow{height:400px;}
+    .cf-card.prev, .cf-card.next{ opacity:0; pointer-events:none; }
+  }
+</style>
+</head>
+<body class="intro-lock">
+
+<div id="introOverlay" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <div class="intro-stage">
+    <img id="introFlower" src="vaagai-flower.jpg" alt="">
+    <img id="introLogo" src="Logo.png" alt="">
+  </div>
+  <div class="intro-tag">Vaagai Boutique Couture</div>
+</div>
+
+<header id="siteHeader">
+  <div class="brand"><img src="Logo.png" alt="Vaagai Boutique Couture logo"></div>
+  <nav class="links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact" class="talk-btn">Let's Talk</a>
+  </nav>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="reveal in-view">
+      <span class="eyebrow">Chennai · Bespoke Tailoring</span>
+      <h1>Gorgeous, custom-fit blouses &amp; outfits <span>designed to make you shine.</span></h1>
+      <p>From aari embroidery to bridal lehengas — every stitch is cut, fitted and finished around your body, your day, your story.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-solid">Book a Fitting</a>
+        <a href="#gallery" class="btn-ghost">View Our Work</a>
+      </div>
+    </div>
+    <div class="stage3d reveal in-view" id="stage3d">
+      <div class="stage3d-inner" id="stageInner">
+        <div class="layer layer-glow"></div>
+        <div class="layer layer-photo">
+          <img src="right panel vagai.png" alt="Vaagai bridal blouse showcase" loading="lazy">
+        </div>
+        <div class="layer layer-chip"><span class="dot"></span>Perfect Fit Guaranteed</div>
+        <div class="layer layer-badge"><div class="num">12+</div><div class="lbl">Tailoring Services</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Aari Work Blouses</span><span>Machine Embroidery</span><span>Lining Blouses</span><span>Lehenga Stitching</span><span>Anarkali Stitching</span><span>Bridal Blouses</span>
+    <span>Aari Work Blouses</span><span>Machine Embroidery</span><span>Lining Blouses</span><span>Lehenga Stitching</span><span>Anarkali Stitching</span><span>Bridal Blouses</span>
+  </div>
+</div>
+
+<section class="sec" id="services">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What We Stitch</span>
+      <h2>Expert stitching for every occasion</h2>
+      <p>Hover a card to flip it — five custom tailoring services, precision-fit and finished by hand.</p>
+    </div>
+    <div class="services-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><div class="icon">🪡</div><h3>Aari Work Blouses</h3></div>
+        <div class="flip-back"><h4>Aari Work</h4><p>Hand-embroidered thread &amp; bead work, stitch by stitch.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><div class="icon">🧵</div><h3>Machine Embroidery</h3></div>
+        <div class="flip-back"><h4>Machine Embroidery</h4><p>Precision motifs finished with a clean, modern edge.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><div class="icon">✂️</div><h3>Lining Blouses</h3></div>
+        <div class="flip-back"><h4>Lining Blouses</h4><p>Structured lining for a comfortable, all-day fit.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><div class="icon">🌸</div><h3>Pattern Blouses</h3></div>
+        <div class="flip-back"><h4>Pattern Blouses</h4><p>Bold patchwork &amp; floral patterns, made to order.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><div class="icon">👑</div><h3>Bridal Blouses</h3></div>
+        <div class="flip-back"><h4>Bridal Blouses</h4><p>Statement pieces for the biggest day of your life.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="parallax-banner">
+  <div class="pb-photo" style="background-image:url('bridal.webp')"></div>
+  <div class="pb-tint"></div>
+  <div class="pb-content">
+    <span class="eyebrow">Stunning Outfits</span>
+    <h2>Tailoring designed to fit your style, personality &amp; grace</h2>
+    <p>From bridal blouses to flowing gowns — every piece is made to help you shine.</p>
+    <a href="#contact" class="btn-solid">Get In Touch</a>
+  </div>
+</section>
+
+<div class="container">
+  <div class="feature-strip">
+    <div class="feature-pill"><span class="dot"></span>Best-in-Class Design</div>
+    <div class="feature-pill"><span class="dot"></span>Designed to Match Your Style</div>
+    <div class="feature-pill"><span class="dot"></span>Trending &amp; Timeless Works</div>
+  </div>
+</div>
+
+<section class="sec" id="gallery">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Gallery</span>
+      <h2>Unique designs, perfect patterns</h2>
+      <p>Tilt over a photo — a glimpse of blouses &amp; outfits stitched for our customers.</p>
+    </div>
+    <div class="gallery">
+      <div class="tilt-card g1" style="background-image:url('aari.webp')"><span class="cap">Aari Hand Embroidery</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1610047520958-b42ebcd2f6cb?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Ivory Floral Sari</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1629118477133-b8b1499f2b8a?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Floral Patchwork</span></div>
+      <div class="tilt-card g4" style="background-image:url('bridal.webp')"><span class="cap">Bridal Couture Detail</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1587271315307-eaebc181c749?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Red &amp; Gold Weave</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1631549424057-403e75d68e2f?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Floral Hair Drape</span></div>
+      <div class="tilt-card" style="background-image:url('https://images.unsplash.com/photo-1617633150878-7df1d12a9a57?fm=jpg&q=75&w=700&auto=format&fit=crop')"><span class="cap">Rani Pink Silk</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="parallax-banner">
+  <div class="pb-photo" style="background-image:url('https://images.unsplash.com/photo-1570212773364-e30cd076539e?fm=jpg&q=75&w=1400&auto=format&fit=crop')"></div>
+  <div class="pb-tint" style="background:linear-gradient(160deg, rgba(59,22,56,.9), rgba(46,140,135,.55));"></div>
+  <div class="pb-content">
+    <span class="eyebrow">Happy Customers</span>
+    <h2>Every fitting is a promise — perfect, on time, unmistakably yours</h2>
+  </div>
+</section>
+
+<section class="sec" id="testimonials">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Testimonials</span>
+      <h2>Happy customers' words</h2>
+      <p>Our expert tailoring and perfect fits have won hearts.</p>
+    </div>
+    <div class="coverflow-wrap">
+      <div class="coverflow" id="coverflow">
+        <div class="cf-card" data-i="0">
+          <span class="quote-mark">"</span>
+          <p class="msg">Vaagai brought my dream bridal blouse to life. The fit was perfect and the tiny details made me feel like a queen on my big day.</p>
+          <div class="stars">★★★★★</div>
+          <div class="who"><div class="avatar">S</div><div><div class="name">Shriya S.</div><div class="loc">Chennai</div></div></div>
+        </div>
+        <div class="cf-card" data-i="1">
+          <span class="quote-mark">"</span>
+          <p class="msg">I love how they customised my gown exactly the way I wanted for my brother's wedding. The stitching was beautiful — I received so many compliments.</p>
+          <div class="stars">★★★★★</div>
+          <div class="who"><div class="avatar">M</div><div><div class="name">Meena R.</div><div class="loc">Anna Nagar</div></div></div>
+        </div>
+        <div class="cf-card" data-i="2">
+          <span class="quote-mark">"</span>
+          <p class="msg">Gave all three blouses for my wedding and one lehenga for the reception to the Vaagai team. They listened and delivered exactly what I asked for.</p>
+          <div class="stars">★★★★★</div>
+          <div class="who"><div class="avatar">R</div><div><div class="name">Raji K.</div><div class="loc">T. Nagar</div></div></div>
+        </div>
+      </div>
+      <div class="cf-nav"><button id="cfPrev">‹</button><button id="cfNext">›</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="t"><div class="ic">✦</div><p>Premium Quality Work</p></div>
+      <div class="t"><div class="ic">✓</div><p>Perfect Fit Guarantee</p></div>
+      <div class="t"><div class="ic">♥</div><p>Customer Satisfaction</p></div>
+      <div class="t"><div class="ic">⏱</div><p>On-Time Delivery</p></div>
+      <div class="t"><div class="ic">✎</div><p>Personalized Service</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="sec" id="faq">
+  <div class="container">
+    <div class="faq-wrap">
+      <div class="faq-side reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>Your questions, our answers</h2>
+        <p>Got any queries about our tailoring services? Here's what customers ask us most.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open"><div class="faq-q"><span>What types of outfits do you stitch?</span><span class="plus">+</span></div><div class="faq-a">We stitch blouses, lehengas, gowns, salwars and more — customised to your style and fit.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Can I bring my own fabric?</span><span class="plus">+</span></div><div class="faq-a">Yes — bring your own fabric or choose from our curated collection.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>How long does an order take?</span><span class="plus">+</span></div><div class="faq-a">Most pieces take 7–14 days depending on the embroidery and detailing involved.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Do you offer custom embroidery?</span><span class="plus">+</span></div><div class="faq-a">Absolutely — aari, zardozi and machine embroidery are all available on request.</div></div>
+        <div class="faq-item"><div class="faq-q"><span>Do you offer alterations?</span><span class="plus">+</span></div><div class="faq-a">Yes, we offer free alterations within 7 days of delivery if the fit isn't perfect.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-cta" id="contact">
+  <div class="pb-photo" style="background-image:url('luxury-bg.webp')"></div>
+  <div class="pb-tint"></div>
+  <div class="pb-content" style="max-width:none;">
+    <span class="eyebrow" style="color:var(--gold)">Get In Touch</span>
+    <h2 style="color:var(--cream); font-size:clamp(1.8rem,4vw,2.6rem); margin-top:14px;">Let's stitch something beautiful together</h2>
+    <p style="color:#E4D3E2; max-width:520px; margin:16px auto 30px;">Tell us your occasion, fabric and fit — we'll take care of the rest.</p>
+    <a href="#" class="btn-solid">Book a Consultation</a>
+    <div class="contact-row">
+      <div><span class="lbl">Call</span>+91 91761 48414</div>
+      <div><span class="lbl">Email</span>vaagaiboutiq@gmail.com</div>
+      <div><span class="lbl">Studio</span>Chennai, Tamil Nadu</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="Logo.png" alt="Vaagai Boutique Couture">
+        <p>Custom tailoring for blouses, lehengas &amp; bridalwear — embrace, empower and elevate your fem'nity.</p>
+        <div class="app-badges"><span>▸ Google Play</span><span>▸ App Store</span></div>
+      </div>
+      <div><h4>Quick Menu</h4><a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a></div>
+      <div><h4>Blouses</h4><a href="#">Aari Work</a><a href="#">Machine Embroidery</a><a href="#">Bridal Blouses</a><a href="#">Lehenga Stitching</a></div>
+      <div><h4>Contact</h4><a href="tel:+919176148414">+91 91761 48414</a><a href="mailto:vaagaiboutiq@gmail.com">vaagaiboutiq@gmail.com</a><a href="#">Instagram · Facebook · YouTube</a></div>
+    </div>
+    <div class="footer-bottom">© 2026 Vaagai Boutique Couture. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(window.gsap && window.ScrollTrigger){ gsap.registerPlugin(ScrollTrigger); }
+
+  /* =========================================================
+     INTRO — FIX 1: No spin. Flower fades → logo scales smoothly → glides to navbar
+  ========================================================= */
+  (function initIntro(){
+    const body = document.body;
+    const overlay = document.getElementById('introOverlay');
+    const flower = document.getElementById('introFlower');
+    const logo = document.getElementById('introLogo');
+    const header = document.getElementById('siteHeader');
+    const headerLogo = document.querySelector('.brand img');
+
+    function finishIntro(){
+      body.classList.remove('intro-lock');
+      header.style.transition = 'opacity .3s ease';
+      header.style.opacity = '1';
+      header.style.pointerEvents = 'auto';
+      if(overlay){
+        overlay.style.transition = 'opacity .35s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.remove(), 400);
+      }
+      if(window.ScrollTrigger) ScrollTrigger.refresh();
+    }
+
+    if(reduceMotion || !window.gsap){
+      finishIntro();
+      return;
+    }
+
+    const tl = gsap.timeline({ delay: .15 });
+
+    /* Step 1: Flower fades in */
+    tl.fromTo(flower,
+        { opacity: 0, scale: .6 },
+        { opacity: 1, scale: 1, duration: .9, ease: 'power2.out' })
+
+    /* Step 2: Flower fades out, logo fades in — NO rotateY / spin */
+      .to(flower,
+        { opacity: 0, scale: .85, duration: .45, ease: 'power2.in' }, '+=.3')
+      .fromTo(logo,
+        { opacity: 0, scale: .85 },
+        { opacity: 1, scale: 1, duration: .45, ease: 'power2.out' }, '-=.15')
+
+    /* Step 3: Brief pause so user can see the logo */
+      .to({}, { duration: .55 })
+
+    /* Step 4: Logo smoothly scales down and glides to navbar — NO spin at all */
+      .add(function(){
+        const targetRect = headerLogo.getBoundingClientRect();
+        const logoRect   = logo.getBoundingClientRect();
+        const dx      = (targetRect.left + targetRect.width  / 2) - (logoRect.left + logoRect.width  / 2);
+        const dy      = (targetRect.top  + targetRect.height / 2) - (logoRect.top  + logoRect.height / 2);
+        const scaleTo = targetRect.width / logoRect.width;
+
+        gsap.to(logo, {
+          x: dx, y: dy, scale: scaleTo,
+          opacity: 0,           /* fade out as it arrives so the real navbar logo takes over cleanly */
+          duration: .9,
+          ease: 'power2.inOut',
+          onComplete: finishIntro
+        });
+      });
+  })();
+
+  /* =========================================================
+     HEADER + NAV
+  ========================================================= */
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
+
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* Reveal */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in-view'); });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* Hero mouse-follow 3D tilt */
+  const stage = document.getElementById('stage3d');
+  const stageInner = document.getElementById('stageInner');
+  if(stage && finePointer && !reduceMotion){
+    stage.addEventListener('mousemove', (e) => {
+      const r = stage.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      stageInner.style.transform = `rotateY(${x*18}deg) rotateX(${-y*18}deg)`;
+    });
+    stage.addEventListener('mouseleave', () => { stageInner.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
+  }
+
+  /* Gallery tilt */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.04)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)'; });
+    });
+  }
+
+  /* Floating badge/chip/glow */
+  if(window.gsap && !reduceMotion){
+    [
+      { sel:'.layer-badge', amp:10, dur:3.2 },
+      { sel:'.layer-chip',  amp:8,  dur:2.6 },
+      { sel:'.layer-glow',  amp:14, dur:4   }
+    ].forEach(({sel, amp, dur}) => {
+      const el = document.querySelector(sel);
+      if(el) gsap.to(el, { y:`+=${amp}`, duration:dur, ease:'sine.inOut', yoyo:true, repeat:-1 });
+    });
+  }
+
+  /* Feature pills tilt */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.feature-pill').forEach(pill => {
+      pill.style.transition = 'transform .2s ease';
+      pill.addEventListener('mousemove', (e) => {
+        const r = pill.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        pill.style.transform = `perspective(500px) rotateX(${-y*14}deg) rotateY(${x*14}deg) translateZ(6px)`;
+      });
+      pill.addEventListener('mouseleave', () => { pill.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)'; });
+    });
+  }
+
+  /* Coverflow */
+  const cards = Array.from(document.querySelectorAll('.cf-card'));
+  let active = 0;
+  function renderCoverflow(){
+    cards.forEach((c, i) => {
+      c.classList.remove('active','prev','next','hide');
+      if(i === active) c.classList.add('active');
+      else if(i === (active - 1 + cards.length) % cards.length) c.classList.add('prev');
+      else if(i === (active + 1) % cards.length) c.classList.add('next');
+      else c.classList.add('hide');
+    });
+  }
+  document.getElementById('cfPrev').addEventListener('click', () => { active = (active - 1 + cards.length) % cards.length; renderCoverflow(); });
+  document.getElementById('cfNext').addEventListener('click', () => { active = (active + 1) % cards.length; renderCoverflow(); });
+  renderCoverflow();
+  setInterval(() => { active = (active + 1) % cards.length; renderCoverflow(); }, 6000);
+
+  /* GSAP ScrollTrigger depth animations */
+  if(window.gsap && window.ScrollTrigger && !reduceMotion){
+    const heroSection = document.querySelector('.hero');
+    const heroText    = document.querySelector('.hero-inner > div.reveal');
+    const heroImage   = document.querySelector('.stage3d');
+    if(heroSection && heroText && heroImage){
+      gsap.timeline({
+        scrollTrigger:{ trigger: heroSection, start:'top top', end:'bottom top', scrub:1 }
+      })
+      .to(heroText,  { y:-110, z:-240, rotateX:11, opacity:.12, ease:'none' }, 0)
+      .to(heroImage, { y:-160, z:-420, rotateY:-22, rotateX:11, scale:.82, opacity:.1, ease:'none' }, 0);
+    }
+
+    document.querySelectorAll('.parallax-banner, .contact-cta').forEach(section => {
+      const photo   = section.querySelector('.pb-photo');
+      const content = section.querySelector('.pb-content');
+      if(!photo || !content) return;
+      gsap.timeline({
+        scrollTrigger:{ trigger:section, start:'top bottom', end:'bottom top', scrub:1 }
+      })
+      .fromTo(photo,    { scale:1.05, yPercent:-6 }, { scale:1.25, yPercent:6, ease:'none' }, 0)
+      .fromTo(content,  { y:80, z:-180, rotateX:14, opacity:.35 }, { y:0, z:0, rotateX:0, opacity:1, ease:'none' }, 0)
+      .to(content,      { y:-100, z:-220, rotateX:-14, opacity:.3, ease:'none' }, .55);
+    });
+
+    gsap.utils.toArray('.flip-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity:0, y:60, rotateX:55, transformPerspective:900 },
+        { opacity:1, y:0, rotateX:0, duration:.9, ease:'power3.out', delay:(i%5)*.06,
+          scrollTrigger:{ trigger:card, start:'top 88%', toggleActions:'play none none reverse' }
+        });
+    });
+
+    gsap.utils.toArray('.tilt-card').forEach((card, i) => {
+      const dir = i % 2 === 0 ? -1 : 1;
+      gsap.fromTo(card,
+        { opacity:0, rotateY: dir * 35, z:-220, transformPerspective:1000 },
+        { opacity:1, rotateY:0, z:0, duration:1, ease:'power3.out', delay:(i%4)*.07,
+          scrollTrigger:{ trigger:card, start:'top 90%', toggleActions:'play none none reverse' }
+        });
+    });
+
+    const cfWrap = document.querySelector('.coverflow-wrap');
+    if(cfWrap){
+      gsap.fromTo(cfWrap,
+        { opacity:0, rotateX:22, y:70, transformPerspective:1000 },
+        { opacity:1, rotateX:0, y:0, duration:1, ease:'power3.out',
+          scrollTrigger:{ trigger:cfWrap, start:'top 85%', toggleActions:'play none none reverse' }
+        });
+    }
+  } else {
+    document.querySelectorAll('.flip-card, .tilt-card, .coverflow-wrap').forEach(el => {
+      el.style.opacity = '1';
+    });
+  }
+</script>
+</body>
+</html>
