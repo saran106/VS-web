@@ -605,12 +605,15 @@ nav.links a:hover::after{
 
     /* ── SERVICES FLIP ── */
     .services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;}
-   
+    .flip-card{height:250px;perspective:1200px;opacity:0;}
     .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.8,.2,1);}
- 
-    .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .flip-card:hover .flip-inner{transform:rotateY(180deg);}
+    .flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;padding:30px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
     .flip-front{background:#fff;box-shadow:0 10px 30px rgba(59,22,56,.1);}
-    .flip-back{background:linear-gradient(150deg,var(--magenta),var(--purple));color:#fff;transform:rotateY(180deg);box-shadow:0 20px 40px rgba(217,28,130,.35);}
+    .flip-back{background:linear-gradient(150deg,var(--magenta),var(--purple));
+        color:#fff;
+        transform:rotateY(180deg);
+        box-shadow:0 20px 40px rgba(217,28,130,.35);}
     .flip-front .icon{width:58px;height:58px;margin-bottom:16px;border-radius:50%;font-size:1.5rem;background:linear-gradient(135deg,rgba(217,28,130,.12),rgba(122,44,142,.12));display:flex;align-items:center;justify-content:center;}
     .flip-front h3{font-size:1.02rem;color:var(--aubergine);}
     .flip-back h4{font-family:'Marcellus';font-size:1rem;margin-bottom:10px;}
@@ -3144,7 +3147,6 @@ body{
 
 @media (max-width:700px){
 
-    
     /* =====================================================
        HERO
        UNTOUCHED
@@ -5464,7 +5466,188 @@ body{
 }
 
 
+/* =========================================================
+   MOBILE / SMALL TABLET — 561px → 700px
+   ========================================================= */
 
+@media (min-width:561px) and (max-width:700px){
+
+    /* =====================================================
+       HERO CONTENT ONLY
+       MORE SPACE + SLIGHTLY LOWER FROM NAVBAR
+       ===================================================== */
+
+    .hero-inner{
+        padding:
+            calc(var(--nav-h) + 40px)
+            20px
+            45px !important;
+
+        gap:24px !important;
+    }
+
+
+    /* =====================================================
+       CHENNAI · BESPOKE TAILORING
+       ===================================================== */
+
+    .hero .eyebrow{
+        font-size:.60rem !important;
+
+        letter-spacing:.23em !important;
+
+        margin-bottom:14px !important;
+    }
+
+
+    /* =====================================================
+       MAIN HEADING
+       ===================================================== */
+
+    .hero h1{
+        font-size:2.30rem !important;
+
+        line-height:1.12 !important;
+
+        max-width:500px !important;
+
+        margin:
+            0 auto
+            12px !important;
+    }
+
+
+    /* =====================================================
+       DESCRIPTION
+       ===================================================== */
+
+    .hero p{
+        font-size:.80rem !important;
+
+        line-height:1.60 !important;
+
+        max-width:410px !important;
+
+        margin:
+            18px auto
+            0 !important;
+    }
+
+
+    /* =====================================================
+       BUTTONS
+       ===================================================== */
+
+    .hero-ctas{
+        gap:11px !important;
+
+        margin-top:27px !important;
+
+        justify-content:center !important;
+    }
+
+    .hero-ctas .btn-solid,
+    .hero-ctas .btn-ghost{
+        padding:
+            12px
+            22px !important;
+
+        font-size:.78rem !important;
+    }
+
+
+    /* =====================================================
+       IMAGE — UNCHANGED
+       ===================================================== */
+
+    .stage3d{
+        height:390px !important;
+        width:100% !important;
+
+        margin-left:auto !important;
+        margin-right:auto !important;
+
+        overflow:visible !important;
+    }
+
+    .layer-photo{
+        inset:
+            18px
+            15px
+            15px
+            15px !important;
+
+        border-radius:21px !important;
+
+        overflow:hidden !important;
+
+        box-sizing:border-box !important;
+
+        background:#eadfd9 !important;
+    }
+
+    .layer-photo img{
+        width:100% !important;
+        height:100% !important;
+
+        object-fit:cover !important;
+
+        object-position:center center !important;
+
+        display:block !important;
+
+        max-width:none !important;
+    }
+
+
+    /* =====================================================
+       12+ BADGE — UNCHANGED
+       ===================================================== */
+
+    .layer-badge{
+        right:10px !important;
+        bottom:10px !important;
+
+        width:128px !important;
+        max-width:128px !important;
+
+        padding:13px 10px !important;
+
+        border-radius:14px !important;
+
+        box-sizing:border-box !important;
+
+        transform:translateZ(70px) !important;
+
+        z-index:20 !important;
+    }
+
+    .layer-badge .num{
+        font-size:1.45rem !important;
+    }
+
+    .layer-badge .lbl{
+        font-size:.58rem !important;
+    }
+
+
+    /* =====================================================
+       PERFECT FIT — UNCHANGED
+       ===================================================== */
+
+    .layer-chip{
+        left:2px !important;
+        top:0 !important;
+
+        padding:9px 13px !important;
+
+        font-size:.70rem !important;
+
+        border-radius:13px !important;
+
+        z-index:20 !important;
+    }
+}
 /* =========================================================
    MOBILE — 360px → 560px
    ONLY MOVE HERO CONTENT DOWN
@@ -5474,7 +5657,10 @@ body{
 @media (max-width:560px){
 
     .hero-inner{
-       
+        padding:
+            calc(var(--nav-h) + 36px)
+            14px
+            38px !important;
 
         gap:20px !important;
     }
@@ -9044,341 +9230,72 @@ body{
     /* ═══════════════════════════════════════════════════════
         GSAP SCROLLTRIGGER
     ═══════════════════════════════════════════════════════ */
-   if(window.gsap && window.ScrollTrigger && !reduceMotion){
+    if(window.gsap && window.ScrollTrigger && !reduceMotion){
 
-    const heroSection = document.querySelector('.hero');
-    const heroText    = document.querySelector('.hero-inner > div.reveal');
-    const heroImage   = document.querySelector('.stage3d');
+        const heroSection = document.querySelector('.hero');
+        const heroText    = document.querySelector('.hero-inner > div.reveal');
+        const heroImage   = document.querySelector('.stage3d');
+        if(heroSection && heroText && heroImage){
+        gsap.timeline({scrollTrigger:{trigger:heroSection,start:'top top',end:'bottom top',scrub:1}})
+            .to(heroText,  {y:-110,z:-240,rotateX:11,opacity:.12,ease:'none'},0)
+            .to(heroImage, {y:-160,z:-420,rotateY:-22,rotateX:11,scale:.82,opacity:.1,ease:'none'},0);
+        }
 
-    /* =========================================
-       HERO — STABLE 3D SCROLL
-       Does NOT fade out
-    ========================================= */
-
-    if(heroSection && heroText && heroImage){
-
-        gsap.timeline({
-            scrollTrigger:{
-                trigger: heroSection,
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 0.6,
-                invalidateOnRefresh: true
-            }
-        })
-
-        .to(heroText,{
-            y:-60,
-            z:-80,
-            rotateX:4,
-            opacity:1,
-            ease:'none'
-        },0)
-
-        .to(heroImage,{
-            y:-80,
-            z:-100,
-            rotateY:-6,
-            rotateX:4,
-            scale:.96,
-            opacity:1,
-            ease:'none'
-        },0);
-    }
-
-
-    /* =========================================
-       RESIZE — IMPORTANT
-       Recalculate ScrollTrigger after resize
-    ========================================= */
-
-    let resizeTimer;
-
-    window.addEventListener('resize',()=>{
-
-        clearTimeout(resizeTimer);
-
-        resizeTimer = setTimeout(()=>{
-
-            ScrollTrigger.refresh();
-
-            const stageInner = document.getElementById('stageInner');
-
-            if(stageInner){
-                stageInner.style.transform = '';
-            }
-
-        },150);
-
-    });
-
-
-    /* =========================================
-       PARALLAX BANNERS
-    ========================================= */
-
-    document.querySelectorAll('.parallax-banner,.contact-cta').forEach(section => {
-
+        document.querySelectorAll('.parallax-banner,.contact-cta').forEach(section => {
         const photo   = section.querySelector('.pb-photo');
         const content = section.querySelector('.pb-content');
+        if(!photo||!content) return;
+        gsap.timeline({scrollTrigger:{trigger:section,start:'top bottom',end:'bottom top',scrub:1}})
+            .fromTo(photo,   {scale:1.05,yPercent:-6},{scale:1.25,yPercent:6,ease:'none'},0)
+            .fromTo(content, {y:80,z:-180,rotateX:14,opacity:.35},{y:0,z:0,rotateX:0,opacity:1,ease:'none'},0)
+            .to(content,     {y:-100,z:-220,rotateX:-14,opacity:.3,ease:'none'}, .55);
+        });
 
-        if(!photo || !content) return;
+        gsap.utils.toArray('.flip-card').forEach((card,i) => {
+        gsap.fromTo(card,
+            {opacity:0,y:60,rotateX:55,transformPerspective:900},
+            {opacity:1,y:0,rotateX:0,duration:.9,ease:'power3.out',delay:(i%5)*.06,
+            scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+        });
 
-        gsap.timeline({
-            scrollTrigger:{
-                trigger:section,
-                start:'top bottom',
-                end:'bottom top',
-                scrub:1
-            }
-        })
+        gsap.utils.toArray('.tilt-card').forEach((card,i) => {
+        const dir = i%2===0?-1:1;
+        gsap.fromTo(card,
+            {opacity:0,rotateY:dir*35,z:-220,transformPerspective:1000},
+            {opacity:1,rotateY:0,z:0,duration:1,ease:'power3.out',delay:(i%4)*.07,
+            scrollTrigger:{trigger:card,start:'top 90%',toggleActions:'play none none reverse'}});
+        });
 
-        .fromTo(
-            photo,
-            {scale:1.05,yPercent:-6},
-            {scale:1.25,yPercent:6,ease:'none'},
-            0
-        )
+        gsap.utils.toArray('.stat-card').forEach((card,i) => {
+        gsap.fromTo(card,
+            {opacity:0,y:50,rotateX:30,transformPerspective:800},
+            {opacity:1,y:0,rotateX:0,duration:.8,ease:'power3.out',delay:i*.1,
+            scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+        });
 
-        .fromTo(
-            content,
-            {
-                y:80,
-                z:-180,
-                rotateX:14,
-                opacity:.35
-            },
-            {
-                y:0,
-                z:0,
-                rotateX:0,
-                opacity:1,
-                ease:'none'
-            },
-            0
-        )
+        gsap.utils.toArray('.swatch-card').forEach((card,i) => {
+        gsap.fromTo(card,
+            {opacity:0,y:60,rotateY:i===1?0:i===0?-20:20,transformPerspective:1000},
+            {opacity:1,y:0,rotateY:0,duration:1,ease:'power3.out',delay:i*.12,
+            scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+        });
 
-        .to(
-            content,
-            {
-                y:-100,
-                z:-220,
-                rotateX:-14,
-                opacity:.3,
-                ease:'none'
-            },
-            .55
-        );
+        gsap.utils.toArray('.process-step').forEach((step,i) => {
+        gsap.fromTo(step,
+            {opacity:0,y:40,scale:.92},
+            {opacity:1,y:0,scale:1,duration:.7,ease:'power3.out',delay:i*.15,
+            scrollTrigger:{trigger:step,start:'top 88%',toggleActions:'play none none reverse'}});
+        });
 
-    });
+        const cfWrap = document.querySelector('.coverflow-wrap');
+        if(cfWrap){
+        gsap.fromTo(cfWrap,
+            {opacity:0,rotateX:22,y:70,transformPerspective:1000},
+            {opacity:1,rotateX:0,y:0,duration:1,ease:'power3.out',
+            scrollTrigger:{trigger:cfWrap,start:'top 85%',toggleActions:'play none none reverse'}});
+        }
 
-
-    /* =========================================
-       FLIP CARDS
-    ========================================= */
-
-    gsap.utils.toArray('.flip-card').forEach((card,i) => {
-
-        gsap.fromTo(
-            card,
-            {
-                opacity:0,
-                y:60,
-                rotateX:55,
-                transformPerspective:900
-            },
-            {
-                opacity:1,
-                y:0,
-                rotateX:0,
-                duration:.9,
-                ease:'power3.out',
-                delay:(i%5)*.06,
-
-                scrollTrigger:{
-                    trigger:card,
-                    start:'top 88%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       TILT CARDS
-    ========================================= */
-
-    gsap.utils.toArray('.tilt-card').forEach((card,i) => {
-
-        const dir = i%2===0 ? -1 : 1;
-
-        gsap.fromTo(
-            card,
-            {
-                opacity:0,
-                rotateY:dir*35,
-                z:-220,
-                transformPerspective:1000
-            },
-            {
-                opacity:1,
-                rotateY:0,
-                z:0,
-                duration:1,
-                ease:'power3.out',
-                delay:(i%4)*.07,
-
-                scrollTrigger:{
-                    trigger:card,
-                    start:'top 90%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       STAT CARDS
-    ========================================= */
-
-    gsap.utils.toArray('.stat-card').forEach((card,i) => {
-
-        gsap.fromTo(
-            card,
-            {
-                opacity:0,
-                y:50,
-                rotateX:30,
-                transformPerspective:800
-            },
-            {
-                opacity:1,
-                y:0,
-                rotateX:0,
-                duration:.8,
-                ease:'power3.out',
-                delay:i*.1,
-
-                scrollTrigger:{
-                    trigger:card,
-                    start:'top 88%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       SWATCH CARDS
-    ========================================= */
-
-    gsap.utils.toArray('.swatch-card').forEach((card,i) => {
-
-        gsap.fromTo(
-            card,
-            {
-                opacity:0,
-                y:60,
-                rotateY:i===1 ? 0 : i===0 ? -20 : 20,
-                transformPerspective:1000
-            },
-            {
-                opacity:1,
-                y:0,
-                rotateY:0,
-                duration:1,
-                ease:'power3.out',
-                delay:i*.12,
-
-                scrollTrigger:{
-                    trigger:card,
-                    start:'top 88%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       PROCESS STEPS
-    ========================================= */
-
-    gsap.utils.toArray('.process-step').forEach((step,i) => {
-
-        gsap.fromTo(
-            step,
-            {
-                opacity:0,
-                y:40,
-                scale:.92
-            },
-            {
-                opacity:1,
-                y:0,
-                scale:1,
-                duration:.7,
-                ease:'power3.out',
-                delay:i*.15,
-
-                scrollTrigger:{
-                    trigger:step,
-                    start:'top 88%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    });
-
-
-    /* =========================================
-       COVERFLOW
-    ========================================= */
-
-    const cfWrap = document.querySelector('.coverflow-wrap');
-
-    if(cfWrap){
-
-        gsap.fromTo(
-            cfWrap,
-            {
-                opacity:0,
-                rotateX:22,
-                y:70,
-                transformPerspective:1000
-            },
-            {
-                opacity:1,
-                rotateX:0,
-                y:0,
-                duration:1,
-                ease:'power3.out',
-
-                scrollTrigger:{
-                    trigger:cfWrap,
-                    start:'top 85%',
-                    toggleActions:'play none none reverse'
-                }
-            }
-        );
-
-    }
-
-} else {
-       
-       
-       
-       
-       
-       
+    } else {
         document.querySelectorAll('.flip-card,.tilt-card,.coverflow-wrap,.stat-card,.swatch-card,.process-step').forEach(el=>{
         el.style.opacity='1';
         });
